@@ -9,7 +9,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['@ondc-website/shared'],
+    exclude: [],
   },
   define: {
     'process.env.NODE_ENV': JSON.stringify('development'),
