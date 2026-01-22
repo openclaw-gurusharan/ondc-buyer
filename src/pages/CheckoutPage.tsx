@@ -1,8 +1,8 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../types';
+import { useCart } from '../hooks';
 import type { UCPQuote, UCPAddress } from '../types';
-import { PageLayout, PageHeader, DRAMS, COLORS, SPACING, TYPOGRAPHY, BUTTON, BADGE, CARD, PILL_BUTTON, GRID, DramsInput } from '@ondc-sdk/shared/design-system';
+import { PageLayout, PageHeader, DRAMS, COLORS, SPACING, TYPOGRAPHY, BUTTON, BADGE, CARD, PILL_BUTTON, GRID, DramsInput } from '@drams-design/components';
 import { BillingForm } from '../components/BillingForm';
 import { PaymentSelector } from '../components/PaymentSelector';
 import { QuoteDisplay } from '../components/QuoteDisplay';
@@ -82,8 +82,6 @@ export function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [deliveryAddress, setDeliveryAddress] = useState<UCPAddress>({
-    name: session?.buyer?.name || '',
-    phone: session?.buyer?.phone || '',
     line1: '',
     city: '',
     state: '',
@@ -202,13 +200,13 @@ export function CheckoutPage() {
 
             <button
               type="submit"
-              disabled={submitting || !session?.buyer?.name || !session?.buyer?.email}
+              disabled={submitting || !session?.buyer?.name || !session?.buyer?.contact?.email}
               style={submitting ? BUTTON_DISABLED_STYLE : BUTTON_PRIMARY_STYLE}
             >
               {submitting ? 'Processing...' : quote ? 'Place Order' : 'Get Quote'}
             </button>
 
-            {!session?.buyer?.name && (
+            {(!session?.buyer?.name || !session?.buyer?.contact?.email) && (
               <p style={VALIDATION_MESSAGE_STYLE}>
                 Please complete billing information to continue
               </p>

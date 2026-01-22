@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { COLORS, SPACING, TYPOGRAPHY, BUTTON, CARD, BADGE, DRAMS, DramsInput } from '@ondc-sdk/shared/design-system';
+import { COLORS, SPACING, TYPOGRAPHY, BUTTON, CARD, BADGE, DRAMS, DramsInput } from '@drams-design/components';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 const STORAGE_KEY = 'ondc-session-id';

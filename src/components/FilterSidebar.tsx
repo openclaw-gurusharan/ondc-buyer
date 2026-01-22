@@ -1,5 +1,5 @@
-import { SPACING, TYPOGRAPHY, DRAMS, CARD } from '@ondc-sdk/shared/design-system';
-import { DramsInput, DramsDropdown } from '@ondc-sdk/shared/design-system';
+import { SPACING, TYPOGRAPHY, DRAMS, CARD } from '@drams-design/components';
+import { DramsInput, DramsDropdown } from '@drams-design/components';
 
 const SORT_OPTIONS = [
   { value: 'relevance', label: 'Relevance' },
@@ -35,6 +35,7 @@ export interface SearchFilters {
   maxPrice?: number;
   minRating?: number;
   sortBy?: string;
+  location?: string;
 }
 
 export interface FilterSidebarProps {
@@ -99,6 +100,19 @@ export function FilterSidebar({ filters, onChange }: FilterSidebarProps): JSX.El
           options={SORT_OPTIONS}
           value={filters.sortBy ?? 'relevance'}
           onChange={(value) => handleChange('sortBy', value)}
+        />
+      </div>
+
+      <div style={FILTER_SECTION_STYLE}>
+        <label htmlFor="location" style={LABEL_STYLE}>
+          Location
+        </label>
+        <DramsInput
+          id="location"
+          type="text"
+          value={filters.location ?? ''}
+          onChange={(e) => handleChange('location', e.target.value || undefined)}
+          placeholder="City, PIN code..."
         />
       </div>
     </div>

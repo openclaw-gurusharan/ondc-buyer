@@ -1,5 +1,5 @@
-import { AgentChat } from '@ondc-sdk/shared/design-system';
-import { PageLayout, PageHeader, DRAMS, SPACING, TYPOGRAPHY } from '@ondc-sdk/shared/design-system';
+import { AgentChat } from '@drams-design/components';
+import { PageLayout, PageHeader, DRAMS, SPACING, TYPOGRAPHY } from '@drams-design/components';
 
 export function AgentChatPage(): JSX.Element {
   return (

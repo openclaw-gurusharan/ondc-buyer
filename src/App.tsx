@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
-import { DRAMS, NAV, SPACING, TYPOGRAPHY, TRANSITIONS } from '@ondc-sdk/shared/design-system';
-import { RollingSearch } from '@ondc-sdk/shared/design-system';
+import { DRAMS, NAV, SPACING, TYPOGRAPHY, TRANSITIONS } from '@drams-design/components';
+import { RollingSearch } from '@drams-design/components';
 import { SearchPage } from './pages/SearchPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';

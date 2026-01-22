@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useCart, CartItem, CartSummary } from '../types';
-import { PageLayout, PageHeader, DRAMS, SPACING, TYPOGRAPHY, BUTTON, CARD, PILL_BUTTON, GRID } from '@ondc-sdk/shared/design-system';
+import { useCart } from '../hooks';
+import { CartItem, CartSummary } from '../components/CartComponents';
+import { PageLayout, PageHeader, DRAMS, SPACING, TYPOGRAPHY, BUTTON, CARD, PILL_BUTTON, GRID } from '@drams-design/components';
 
 const GRID_LAYOUT_STYLE = {
   ...GRID.twoColumnsWide,

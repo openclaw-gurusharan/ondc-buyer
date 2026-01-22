@@ -1,0 +1,367 @@
+{
+  "features": [
+    {
+      "id": "F-001",
+      "description": "Setup project infrastructure - Vite config, TypeScript config, ESLint, Prettier",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "implemented",
+      "acceptance": [
+        "vite.config.ts configured",
+        "tsconfig.json configured",
+        "ESLint and Prettier working",
+        "Build runs without errors"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-002",
+      "description": "Setup React Router with base routes (home, search, cart, checkout, orders)",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "implemented",
+      "acceptance": [
+        "BrowserRouter configured",
+        "Routes defined in App.tsx",
+        "Navigation works between pages",
+        "404 page implemented"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-003",
+      "description": "Design system integration - setup @ondc-sdk/shared/design-system",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "implemented",
+      "acceptance": [
+        "Design system components imported",
+        "Theme provider configured",
+        "Base layout components created"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-004",
+      "description": "Product search page with ONDC catalog integration",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "Search input component",
+        "Streaming results display",
+        "Product cards with images/prices",
+        "Filters (category, price, location)"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-005",
+      "description": "Shopping cart - add/remove items, quantity management",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "Add to cart from search results",
+        "Cart page with item list",
+        "Quantity adjustment (+/-)",
+        "Remove item functionality",
+        "Cart persistence (local storage)"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-006",
+      "description": "Checkout flow - delivery address, payment method selection",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "Delivery address form",
+        "Payment method selection",
+        "Order summary display",
+        "Place order button",
+        "Order confirmation page"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-007",
+      "description": "Order tracking - view status, history",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "Orders list page",
+        "Order detail page",
+        "Status updates (pending, confirmed, shipped, delivered)",
+        "Order history persistence"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-008",
+      "description": "AI agent chat interface - natural language search assistant",
+      "priority": "core",
+      "tier": "core",
+      "status": "pending",
+      "acceptance": [
+        "Chat UI component",
+        "Message history display",
+        "Streaming response handling",
+        "Context-aware suggestions"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-009",
+      "description": "API service layer - ONDC protocol integration",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "Search API service",
+        "Cart API service",
+        "Order API service",
+        "Error handling wrapper"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-010",
+      "description": "Testing infrastructure - Vitest setup, test utilities",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "Vitest configured",
+        "Test setup file (setup.ts)",
+        "Helper functions for testing",
+        "Example component test"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-011",
+      "description": "Authentication - user login/logout",
+      "priority": "core",
+      "tier": "core",
+      "status": "pending",
+      "acceptance": [
+        "Login form",
+        "Session management",
+        "Protected routes",
+        "Logout functionality"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-012",
+      "description": "Product detail page - full description, reviews, related products",
+      "priority": "core",
+      "tier": "core",
+      "status": "pending",
+      "acceptance": [
+        "Product details view",
+        "Image gallery",
+        "Add to cart from detail page",
+        "Reviews section",
+        "Related products carousel"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-013",
+      "description": "Saved items/favorites - wishlist functionality",
+      "priority": "full",
+      "tier": "full",
+      "status": "pending",
+      "acceptance": [
+        "Add to favorites",
+        "Wishlist page",
+        "Move favorites to cart",
+        "Remove from favorites"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-014",
+      "description": "Order cancellation and return flow",
+      "priority": "full",
+      "tier": "full",
+      "status": "pending",
+      "acceptance": [
+        "Cancel order button",
+        "Cancellation reason form",
+        "Return request form",
+        "Status tracking for cancellations"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-015",
+      "description": "Multi-store support - compare prices across sellers",
+      "priority": "full",
+      "tier": "full",
+      "status": "pending",
+      "acceptance": [
+        "Seller selection",
+        "Price comparison view",
+        "Store ratings display",
+        "Filter by seller"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-016",
+      "description": "Location-based search - GPS integration",
+      "priority": "core",
+      "tier": "core",
+      "status": "pending",
+      "acceptance": [
+        "Geolocation API integration",
+        "Location permission prompt",
+        "Nearby products filtering",
+        "Manual location entry fallback"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-017",
+      "description": "Push notifications - order updates, promotions",
+      "priority": "full",
+      "tier": "full",
+      "status": "pending",
+      "acceptance": [
+        "Notification permission request",
+        "Order status notifications",
+        "Promotional messages",
+        "Notification preferences"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-018",
+      "description": "Accessibility audit - WCAG 2.1 AA compliance",
+      "priority": "core",
+      "tier": "core",
+      "status": "pending",
+      "acceptance": [
+        "Keyboard navigation",
+        "Screen reader support",
+        "Focus management",
+        "ARIA labels",
+        "Color contrast compliance"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-019",
+      "description": "Performance optimization - lazy loading, code splitting",
+      "priority": "core",
+      "tier": "core",
+      "status": "pending",
+      "acceptance": [
+        "Route-based code splitting",
+        "Image lazy loading",
+        "Bundle size optimization",
+        "Lighthouse score >90"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "F-020",
+      "description": "Error boundaries and error handling",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "Error boundary component",
+        "Fallback UI",
+        "Error logging",
+        "User-friendly error messages"
+      ],
+      "plan_references": []
+    },
+    {
+      "id": "SSO-001",
+      "description": "SSO: Auth hook with cookie validation (src/hooks/useAuth.ts)",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "useAuth() hook with user state",
+        "Fetch user from https://aadharcha.in/api/auth/me with credentials: include",
+        "login() redirects to aadharcha.in/login",
+        "logout() calls aadharcha.in/api/auth/logout",
+        "isAuthenticated boolean flag"
+      ],
+      "plan_references": [
+        "Cookie-based SSO Plan - Phase 2"
+      ]
+    },
+    {
+      "id": "SSO-002",
+      "description": "SSO: API client with session support (src/lib/api.ts)",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "Axios instance with base URL",
+        "credentials: include for all requests",
+        "Session validation wrapper",
+        "Auto-redirect to aadharcha.in/login if not authenticated",
+        "X-User-ID header for user identification"
+      ],
+      "plan_references": [
+        "Cookie-based SSO Plan - Phase 2"
+      ]
+    },
+    {
+      "id": "SSO-003",
+      "description": "SSO: Protected route wrapper",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "ProtectedRoute component",
+        "Validate session before rendering",
+        "Redirect to aadharcha.in/login if not authenticated",
+        "Loading state during validation"
+      ],
+      "plan_references": [
+        "Cookie-based SSO Plan - Phase 2"
+      ]
+    },
+    {
+      "id": "SSO-004",
+      "description": "SSO: Environment configuration",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "VITE_IDENTITY_URL=https://aadharcha.in",
+        "Local: VITE_IDENTITY_URL=http://localhost:3000",
+        "Config typed and exported"
+      ],
+      "plan_references": [
+        "Cookie-based SSO Plan - Environment Variables"
+      ]
+    },
+    {
+      "id": "SSO-005",
+      "description": "SSO: Login page redirect",
+      "priority": "mvp",
+      "tier": "mvp",
+      "status": "pending",
+      "acceptance": [
+        "/login page redirects to aadharcha.in/login",
+        "Return URL parameter for redirect back",
+        "Loading message while redirecting"
+      ],
+      "plan_references": [
+        "Cookie-based SSO Plan - Phase 2"
+      ]
+    }
+  ]
+}

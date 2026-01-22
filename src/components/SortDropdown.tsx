@@ -1,5 +1,5 @@
-import { SPACING, TYPOGRAPHY, DRAMS } from '@ondc-sdk/shared/design-system';
-import { DramsDropdown } from '@ondc-sdk/shared/design-system';
+import { SPACING, TYPOGRAPHY, DRAMS } from '@drams-design/components';
+import { DramsDropdown } from '@drams-design/components';
 
 const SORT_OPTIONS = [
   { value: 'relevance', label: 'Relevance' },

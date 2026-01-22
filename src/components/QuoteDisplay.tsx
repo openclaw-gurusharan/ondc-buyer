@@ -1,5 +1,5 @@
 import type { UCPQuote } from '../types';
-import { COLORS, SPACING, TYPOGRAPHY, RADIUS, DRAMS } from '@ondc-sdk/shared/design-system';
+import { COLORS, SPACING, TYPOGRAPHY, RADIUS, DRAMS } from '@drams-design/components';
 
 const BREAKUP_TITLES: Record<string, string> = {
   item: 'Items',

@@ -1,6 +1,6 @@
 import { useState, FormEvent } from 'react';
-import { SPACING, TYPOGRAPHY, DRAMS, GRID } from '@ondc-sdk/shared/design-system';
-import { DramsInput, DramsDropdown, DramsButton } from '@ondc-sdk/shared/design-system';
+import { SPACING, TYPOGRAPHY, DRAMS, GRID } from '@drams-design/components';
+import { DramsInput, DramsDropdown, DramsButton } from '@drams-design/components';
 
 const CATEGORY_OPTIONS = [
   { value: 'grocery', label: 'Grocery' },

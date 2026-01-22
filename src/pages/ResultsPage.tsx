@@ -4,7 +4,7 @@ import { useSearch, useCart } from '../hooks';
 import { SearchBar, FilterSidebar, ResultGrid } from '../components';
 import type { UCPItem } from '../types';
 import type { SearchFilters } from '../components/FilterSidebar';
-import { PageLayout, PageHeader, DRAMS, SPACING, TYPOGRAPHY, BUTTON, LAYOUT, CARD } from '@ondc-sdk/shared/design-system';
+import { PageLayout, PageHeader, DRAMS, SPACING, TYPOGRAPHY, BUTTON, LAYOUT, CARD } from '@drams-design/components';
 
 interface SearchResponse {
   items: UCPItem[];

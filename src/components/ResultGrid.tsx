@@ -1,6 +1,6 @@
-import { DramsProductCard, DramsEmptyState, DramsSpinner } from '@ondc-sdk/shared/design-system';
+import { DramsProductCard, DramsEmptyState, DramsSpinner } from '@drams-design/components';
 import type { UCPItem } from '../types';
-import { SPACING } from '@ondc-sdk/shared/design-system';
+import { SPACING } from '@drams-design/components';
 
 const GRID_STYLE = {
   display: 'grid',

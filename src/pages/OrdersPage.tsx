@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { UCPOrder, UCPOrderStatus } from '../types';
-import { PageLayout, PageHeader, DRAMS, SPACING, TYPOGRAPHY, CARD, PILL_BUTTON, RADIUS, TRANSITIONS, BADGE, GRID, DramsTabGroup, DramsEmptyState, type DramsTabOption } from '@ondc-sdk/shared/design-system';
+import { PageLayout, PageHeader, DRAMS, SPACING, TYPOGRAPHY, CARD, PILL_BUTTON, RADIUS, TRANSITIONS, BADGE, GRID, DramsTabGroup, DramsEmptyState, type DramsTabOption } from '@drams-design/components';
 
 type StatusFilter = 'all' | 'pending' | 'active' | 'complete';
 
