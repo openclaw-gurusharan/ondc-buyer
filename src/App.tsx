@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
 import { DRAMS, NAV, SPACING, TYPOGRAPHY, TRANSITIONS } from '@drams-design/components';
 import { RollingSearch } from '@drams-design/components';
+import { useAuth } from './hooks';
 import { SearchPage } from './pages/SearchPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
@@ -9,6 +10,7 @@ import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { OrdersPage } from './pages/OrdersPage';
 import { OrderDetailPage } from './pages/OrderDetailPage';
+import { LoginPage } from './pages/LoginPage';
 
 // DRAMS: Clean white background, minimal chrome
 const APP_CONTAINER_STYLE = {
@@ -80,6 +82,7 @@ const NAV_STYLES = `
 export function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, isAuthenticated, login, logout } = useAuth();
 
   const isActivePath = (path: string): boolean => {
     if (path === '/') return location.pathname === '/';
@@ -115,6 +118,47 @@ export function App() {
                 </Link>
               ))}
               <RollingSearch onSearch={handleSearch} />
+
+              {/* Auth section */}
+              {isAuthenticated && user ? (
+                <div style={{ display: 'flex', gap: SPACING.sm, alignItems: 'center' }}>
+                  <Link
+                    to="/orders"
+                    className={NAV_LINK_CLASS}
+                    style={{ ...TYPOGRAPHY.bodySmall, color: DRAMS.textLight }}
+                  >
+                    {user.wallet_address.slice(0, 6)}...
+                  </Link>
+                  <button
+                    onClick={() => logout()}
+                    style={{
+                      ...TYPOGRAPHY.bodySmall,
+                      padding: `${SPACING.xs} ${SPACING.md}`,
+                      borderRadius: '48px',
+                      border: 'none',
+                      backgroundColor: DRAMS.grayTrack,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => login()}
+                  style={{
+                    ...TYPOGRAPHY.bodySmall,
+                    padding: `${SPACING.xs} ${SPACING.md}`,
+                    borderRadius: '48px',
+                    border: 'none',
+                    backgroundColor: DRAMS.orange,
+                    color: 'white',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Login
+                </button>
+              )}
             </nav>
           </div>
         </header>
@@ -129,6 +173,7 @@ export function App() {
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/orders/:id" element={<OrderDetailPage />} />
             <Route path="/agent" element={<AgentChatPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

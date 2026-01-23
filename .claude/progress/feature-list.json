@@ -46,7 +46,7 @@
       "description": "Product search page with ONDC catalog integration",
       "priority": "mvp",
       "tier": "mvp",
-      "status": "pending",
+      "status": "implemented",
       "acceptance": [
         "Search input component",
         "Streaming results display",
@@ -60,7 +60,7 @@
       "description": "Shopping cart - add/remove items, quantity management",
       "priority": "mvp",
       "tier": "mvp",
-      "status": "pending",
+      "status": "implemented",
       "acceptance": [
         "Add to cart from search results",
         "Cart page with item list",
@@ -75,7 +75,7 @@
       "description": "Checkout flow - delivery address, payment method selection",
       "priority": "mvp",
       "tier": "mvp",
-      "status": "pending",
+      "status": "implemented",
       "acceptance": [
         "Delivery address form",
         "Payment method selection",
@@ -90,7 +90,7 @@
       "description": "Order tracking - view status, history",
       "priority": "mvp",
       "tier": "mvp",
-      "status": "pending",
+      "status": "implemented",
       "acceptance": [
         "Orders list page",
         "Order detail page",
@@ -104,7 +104,7 @@
       "description": "AI agent chat interface - natural language search assistant",
       "priority": "core",
       "tier": "core",
-      "status": "pending",
+      "status": "implemented",
       "acceptance": [
         "Chat UI component",
         "Message history display",
@@ -288,7 +288,7 @@
       "description": "SSO: Auth hook with cookie validation (src/hooks/useAuth.ts)",
       "priority": "mvp",
       "tier": "mvp",
-      "status": "pending",
+      "status": "implemented",
       "acceptance": [
         "useAuth() hook with user state",
         "Fetch user from https://aadharcha.in/api/auth/me with credentials: include",
@@ -305,7 +305,7 @@
       "description": "SSO: API client with session support (src/lib/api.ts)",
       "priority": "mvp",
       "tier": "mvp",
-      "status": "pending",
+      "status": "implemented",
       "acceptance": [
         "Axios instance with base URL",
         "credentials: include for all requests",
@@ -322,7 +322,7 @@
       "description": "SSO: Protected route wrapper",
       "priority": "mvp",
       "tier": "mvp",
-      "status": "pending",
+      "status": "implemented",
       "acceptance": [
         "ProtectedRoute component",
         "Validate session before rendering",
@@ -338,7 +338,7 @@
       "description": "SSO: Environment configuration",
       "priority": "mvp",
       "tier": "mvp",
-      "status": "pending",
+      "status": "implemented",
       "acceptance": [
         "VITE_IDENTITY_URL=https://aadharcha.in",
         "Local: VITE_IDENTITY_URL=http://localhost:3000",
@@ -353,7 +353,7 @@
       "description": "SSO: Login page redirect",
       "priority": "mvp",
       "tier": "mvp",
-      "status": "pending",
+      "status": "implemented",
       "acceptance": [
         "/login page redirects to aadharcha.in/login",
         "Return URL parameter for redirect back",
