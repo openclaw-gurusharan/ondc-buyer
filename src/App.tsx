@@ -2,6 +2,7 @@ import { Routes, Route, Navigate, Link, useLocation, useNavigate } from 'react-r
 import { DRAMS, NAV, SPACING, TYPOGRAPHY, TRANSITIONS } from '@drams-design/components';
 import { RollingSearch } from '@drams-design/components';
 import { useAuth } from './hooks';
+import { ProtectedRoute } from './components/ProtectedRoute';
 import { SearchPage } from './pages/SearchPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
@@ -168,12 +169,34 @@ export function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/product/:id" element={<ProductDetailPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/orders" element={<OrdersPage />} />
-            <Route path="/orders/:id" element={<OrderDetailPage />} />
             <Route path="/agent" element={<AgentChatPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            {/* Protected routes - require authentication */}
+            <Route path="/cart" element={
+              <ProtectedRoute>
+                <CartPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/checkout" element={
+              <ProtectedRoute>
+                <CheckoutPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/orders" element={
+              <ProtectedRoute>
+                <OrdersPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/orders/:id" element={
+              <ProtectedRoute>
+                <OrderDetailPage />
+              </ProtectedRoute>
+            } />
+            {/* Login page - redirect if already authenticated */}
+            <Route path="/login" element={
+              <ProtectedRoute requireAuth={false}>
+                <LoginPage />
+              </ProtectedRoute>
+            } />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
