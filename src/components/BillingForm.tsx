@@ -75,6 +75,7 @@ export function BillingForm({ session, onSave }: BillingFormProps): React.ReactE
   const [email, setEmail] = useState(session?.buyer?.email || '');
   const [phone, setPhone] = useState(session?.buyer?.phone || '');
   const [taxId, setTaxId] = useState('');
+  const [aadhaar, setAadhaar] = useState('');
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -101,7 +102,7 @@ export function BillingForm({ session, onSave }: BillingFormProps): React.ReactE
       const response = await fetch(`${API_BASE}/api/cart/buyer`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId, name, email, phone, taxId }),
+        body: JSON.stringify({ sessionId, name, email, phone, taxId, aadhaar }),
       });
 
       if (!response.ok) {
@@ -119,15 +120,16 @@ export function BillingForm({ session, onSave }: BillingFormProps): React.ReactE
     } finally {
       setSaving(false);
     }
-  }, [name, email, phone, taxId]);
+  }, [name, email, phone, taxId, aadhaar]);
 
   const isDirty = useMemo(
     () =>
       name !== (session?.buyer?.name || '') ||
       email !== (session?.buyer?.email || '') ||
       phone !== (session?.buyer?.phone || '') ||
-      taxId !== '',
-    [name, email, phone, taxId, session]
+      taxId !== '' ||
+      aadhaar !== '',
+    [name, email, phone, taxId, aadhaar, session]
   );
 
   const isValid = useMemo(
@@ -202,6 +204,19 @@ export function BillingForm({ session, onSave }: BillingFormProps): React.ReactE
         />
         <p style={{ ...TYPOGRAPHY.bodySmall, color: COLORS.textMuted, marginTop: `-${SPACING.md}` }}>
           For business purchases and GST invoices
+        </p>
+
+        <FormField
+          label="Aadhaar Number (Optional)"
+          value={aadhaar}
+          onChange={(value) => setAadhaar(value.replace(/\D/g, '').slice(0, 12))}
+          onBlur={handleSave}
+          placeholder="123456789012"
+          maxLength={12}
+          pattern="[0-9]{12}"
+        />
+        <p style={{ ...TYPOGRAPHY.bodySmall, color: COLORS.textMuted, marginTop: `-${SPACING.md}` }}>
+          For Aadhaar-linked verified transactions
         </p>
       </div>
     </div>
