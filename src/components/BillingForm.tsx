@@ -75,7 +75,8 @@ export function BillingForm({ session, onSave }: BillingFormProps): React.ReactE
   const [email, setEmail] = useState(session?.buyer?.email || '');
   const [phone, setPhone] = useState(session?.buyer?.phone || '');
   const [taxId, setTaxId] = useState('');
-  const [aadhaar, setAadhaar] = useState('');
+  const [aadhaar, setAadhaar] = useState(session?.buyer?.aadhaar || '');
+  const [aadhaarVerified, setAadhaarVerified] = useState(session?.buyer?.aadhaar_verified || false);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -84,6 +85,8 @@ export function BillingForm({ session, onSave }: BillingFormProps): React.ReactE
       setName(session.buyer.name || '');
       setEmail(session.buyer.email || '');
       setPhone(session.buyer.phone || '');
+      setAadhaar(session.buyer.aadhaar || '');
+      setAadhaarVerified(session.buyer.aadhaar_verified || false);
     }
   }, [session]);
 
@@ -102,7 +105,7 @@ export function BillingForm({ session, onSave }: BillingFormProps): React.ReactE
       const response = await fetch(`${API_BASE}/api/cart/buyer`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId, name, email, phone, taxId, aadhaar }),
+        body: JSON.stringify({ sessionId, name, email, phone, taxId, aadhaar, aadhaar_verified: aadhaarVerified }),
       });
 
       if (!response.ok) {
@@ -206,15 +209,24 @@ export function BillingForm({ session, onSave }: BillingFormProps): React.ReactE
           For business purchases and GST invoices
         </p>
 
-        <FormField
-          label="Aadhaar Number (Optional)"
-          value={aadhaar}
-          onChange={(value) => setAadhaar(value.replace(/\D/g, '').slice(0, 12))}
-          onBlur={handleSave}
-          placeholder="123456789012"
-          maxLength={12}
-          pattern="[0-9]{12}"
-        />
+        <div style={{ display: 'flex', alignItems: 'center', gap: SPACING.md }}>
+          <div style={{ flex: 1 }}>
+            <FormField
+              label="Aadhaar Number (Optional)"
+              value={aadhaar}
+              onChange={(value) => setAadhaar(value.replace(/\D/g, '').slice(0, 12))}
+              onBlur={handleSave}
+              placeholder="123456789012"
+              maxLength={12}
+              pattern="[0-9]{12}"
+            />
+          </div>
+          {aadhaarVerified && (
+            <div style={{ ...BADGE.success, marginTop: SPACING.xl }}>
+              ✓ Verified
+            </div>
+          )}
+        </div>
         <p style={{ ...TYPOGRAPHY.bodySmall, color: COLORS.textMuted, marginTop: `-${SPACING.md}` }}>
           For Aadhaar-linked verified transactions
         </p>
