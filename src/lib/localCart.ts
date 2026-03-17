@@ -157,6 +157,10 @@ export function updateLocalQuantity(sessionId: string, itemId: string, quantity:
   });
 }
 
+const DELIVERY_COST_WITH_ADDRESS = 49;
+const DELIVERY_COST_WITHOUT_ADDRESS = 79;
+const LOCAL_TAX_RATE = 0.05;
+
 export function createLocalQuote(session: UCPSession, deliveryAddress: UCPAddress): UCPQuote {
   const hasAddress = Boolean(
     deliveryAddress.line1 && deliveryAddress.city && deliveryAddress.state && deliveryAddress.postalCode
@@ -165,8 +169,10 @@ export function createLocalQuote(session: UCPSession, deliveryAddress: UCPAddres
     const next = Number(entry.item.price?.value ?? 0);
     return total + (next * entry.quantity);
   }, 0);
-  const deliveryValue = subtotalValue > 0 ? (hasAddress ? 49 : 79) : 0;
-  const taxValue = Number((subtotalValue * 0.05).toFixed(2));
+  const deliveryValue = subtotalValue > 0
+    ? (hasAddress ? DELIVERY_COST_WITH_ADDRESS : DELIVERY_COST_WITHOUT_ADDRESS)
+    : 0;
+  const taxValue = Number((subtotalValue * LOCAL_TAX_RATE).toFixed(2));
   const totalValue = subtotalValue + deliveryValue + taxValue;
 
   return {

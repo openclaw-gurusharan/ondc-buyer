@@ -69,7 +69,8 @@ export function useCart(): UseCartResult {
     try {
       const data = await cartRequest(`${API_BASE}/api/cart?sessionId=${sessionId}`);
       setSession(data.session);
-    } catch {
+    } catch (err) {
+      console.error('Failed to refresh cart, falling back to local session:', err);
       setSession(getLocalSession(sessionId));
       setError(null);
     } finally {
@@ -92,7 +93,8 @@ export function useCart(): UseCartResult {
         body: JSON.stringify({ sessionId, item, quantity }),
       });
       setSession(data.session);
-    } catch {
+    } catch (err) {
+      console.error('Failed to add item to cart, falling back to local update:', err);
       setSession(addLocalItem(sessionId, item, quantity));
       setError(null);
     } finally {
@@ -110,7 +112,8 @@ export function useCart(): UseCartResult {
         { method: 'DELETE' }
       );
       setSession(data.session);
-    } catch {
+    } catch (err) {
+      console.error('Failed to remove item from cart, falling back to local update:', err);
       setSession(removeLocalItem(sessionId, itemId));
       setError(null);
     } finally {
@@ -129,7 +132,8 @@ export function useCart(): UseCartResult {
         body: JSON.stringify({ sessionId, quantity }),
       });
       setSession(data.session);
-    } catch {
+    } catch (err) {
+      console.error('Failed to update cart quantity, falling back to local update:', err);
       setSession(updateLocalQuantity(sessionId, itemId, quantity));
       setError(null);
     } finally {

@@ -97,7 +97,7 @@ export function OrdersPage() {
       <DramsTabGroup
         options={tabOptions}
         value={filter}
-        onChange={(value) => setFilter(value as StatusFilter)}
+        onChange={(value: string) => setFilter(value as StatusFilter)}
         style={{ marginBottom: SPACING['2xl'] }}
       />
 

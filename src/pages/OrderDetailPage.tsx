@@ -4,7 +4,8 @@ import type { UCPOrder, UCPOrderStatus, UCPFulfillmentStatus } from '../types';
 import { PageLayout, DRAMS, COLORS, SPACING, TYPOGRAPHY, BUTTON, CARD, BADGE } from '@portfolio-ui';
 
 // Mock order fetch - to be replaced with API call
-const fetchOrder = async (): Promise<UCPOrder | null> => {
+const fetchOrder = async (orderId: string): Promise<UCPOrder | null> => {
+  void orderId;
   // TODO: Replace with actual API call
   return null;
 };
@@ -108,7 +109,7 @@ export function OrderDetailPage() {
       }
 
       try {
-        const data = await fetchOrder();
+        const data = await fetchOrder(id);
         if (!data) {
           setError('Order not found');
         } else {
