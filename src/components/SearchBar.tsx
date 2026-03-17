@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { SPACING, TYPOGRAPHY, DRAMS, GRID } from '@drams-design/components';
+import { GRID } from '@drams-design/components';
 import { DramsInput, DramsDropdown, DramsButton } from '@drams-design/components';
 
 const CATEGORY_OPTIONS = [

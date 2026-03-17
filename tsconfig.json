@@ -14,7 +14,8 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@drams-design/components": ["../../Research/drams-design/src/index.ts"]
     }
   },
   "include": ["src"]

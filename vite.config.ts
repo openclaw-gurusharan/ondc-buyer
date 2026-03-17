@@ -7,6 +7,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@drams-design/components': path.resolve(
+        __dirname,
+        '../../Research/drams-design/src/index.ts'
+      ),
       crypto: 'crypto-browserify',
     },
   },

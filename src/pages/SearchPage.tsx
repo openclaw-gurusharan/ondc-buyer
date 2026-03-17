@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { SearchBar } from '../components/SearchBar';
-import { PageLayout, TYPOGRAPHY, DRAMS, SPACING, APP, LAYOUT } from '@drams-design/components';
+import { PageLayout, TYPOGRAPHY, DRAMS, SPACING, LAYOUT } from '@drams-design/components';
 
 const HERO_STYLE = {
   ...LAYOUT.centered,

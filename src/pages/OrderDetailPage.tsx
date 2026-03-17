@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { UCPOrder, UCPOrderStatus, UCPFulfillmentStatus } from '../types';
-import { PageLayout, PageHeader, DRAMS, COLORS, SPACING, TYPOGRAPHY, BUTTON, CARD, BADGE } from '@drams-design/components';
+import { PageLayout, DRAMS, COLORS, SPACING, TYPOGRAPHY, BUTTON, CARD, BADGE } from '@drams-design/components';
 
 // Mock order fetch - to be replaced with API call
-const fetchOrder = async (_orderId: string): Promise<UCPOrder | null> => {
+const fetchOrder = async (): Promise<UCPOrder | null> => {
   // TODO: Replace with actual API call
   return null;
 };
@@ -40,6 +40,8 @@ const getOrderStatusBadgeVariant = (status: UCPOrderStatus): keyof typeof BADGE 
 const getFulfillmentStatusLabel = (status: UCPFulfillmentStatus): string => {
   const labels: Record<UCPFulfillmentStatus, string> = {
     pending: 'Pending',
+    processing: 'Processing',
+    packed: 'Packed',
     searching_agent: 'Searching for Agent',
     agent_assigned: 'Agent Assigned',
     picking_up: 'Picking Up',
@@ -106,7 +108,7 @@ export function OrderDetailPage() {
       }
 
       try {
-        const data = await fetchOrder(id);
+        const data = await fetchOrder();
         if (!data) {
           setError('Order not found');
         } else {

@@ -1,5 +1,5 @@
 import { AgentChat } from '@drams-design/components';
-import { PageLayout, PageHeader, DRAMS, SPACING, TYPOGRAPHY } from '@drams-design/components';
+import { PageLayout, PageHeader } from '@drams-design/components';
 
 export function AgentChatPage(): JSX.Element {
   return (

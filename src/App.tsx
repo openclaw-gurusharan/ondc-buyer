@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
-import { DRAMS, NAV, SPACING, TYPOGRAPHY, TRANSITIONS } from '@drams-design/components';
+import { DRAMS, SPACING, TYPOGRAPHY, TRANSITIONS } from '@drams-design/components';
 import { RollingSearch } from '@drams-design/components';
-import { useAuth } from './hooks';
-import { useWallet } from '@solana/wallet-adapter-react';
+import { useTrustState } from './hooks';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { SearchPage } from './pages/SearchPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
@@ -12,6 +12,7 @@ import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { OrdersPage } from './pages/OrdersPage';
 import { OrderDetailPage } from './pages/OrderDetailPage';
+import { TrustStatusChip } from './components/TrustStatus';
 
 // DRAMS: Clean white background, minimal chrome
 const APP_CONTAINER_STYLE = {
@@ -83,7 +84,9 @@ const NAV_STYLES = `
 export function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { publicKey } = useWallet();
+  const walletAddress = publicKey?.toBase58() ?? null;
+  const trust = useTrustState(walletAddress);
 
   const isActivePath = (path: string): boolean => {
     if (path === '/') return location.pathname === '/';
@@ -119,6 +122,9 @@ export function App() {
                 </Link>
               ))}
               <RollingSearch onSearch={handleSearch} />
+              {walletAddress && (
+                <TrustStatusChip state={trust.state} loading={trust.loading} />
+              )}
 
               {/* Auth section with wallet connection */}
               <WalletMultiButton

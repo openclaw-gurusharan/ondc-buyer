@@ -1,11 +1,14 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../hooks';
+import { useCart, useTrustState } from '../hooks';
 import type { UCPQuote, UCPAddress } from '../types';
 import { PageLayout, PageHeader, DRAMS, COLORS, SPACING, TYPOGRAPHY, BUTTON, BADGE, CARD, PILL_BUTTON, GRID, DramsInput } from '@drams-design/components';
 import { BillingForm } from '../components/BillingForm';
 import { PaymentSelector } from '../components/PaymentSelector';
 import { QuoteDisplay } from '../components/QuoteDisplay';
+import { TrustNotice } from '../components/TrustStatus';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { createLocalQuote } from '../lib/localCart';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
@@ -77,7 +80,9 @@ const FOOTER_STYLE = {
 
 export function CheckoutPage() {
   const navigate = useNavigate();
-  const { session, loading, error, itemCount, clearError, refreshCart } = useCart();
+  const { publicKey } = useWallet();
+  const { session, loading, error, itemCount, refreshCart } = useCart();
+  const trust = useTrustState(publicKey?.toBase58() ?? null);
   const [quote, setQuote] = useState<UCPQuote | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -89,6 +94,8 @@ export function CheckoutPage() {
     country: 'IND',
   });
 
+  const trustBlocksCheckout = !trust.loading && trust.state !== 'verified';
+
   // Redirect to cart if empty (only after we've loaded the session)
   useEffect(() => {
     // Check session is not null to ensure we've actually loaded the cart
@@ -99,6 +106,10 @@ export function CheckoutPage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (trustBlocksCheckout) {
+      setSubmitError(trust.reason || 'Complete AadhaarChain verification before continuing.');
+      return;
+    }
     setSubmitting(true);
     setSubmitError(null);
 
@@ -134,7 +145,12 @@ export function CheckoutPage() {
       // Otherwise, show quote for confirmation
       setQuote(data.quote);
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : 'Checkout failed');
+      if (session) {
+        setQuote(createLocalQuote(session, deliveryAddress));
+        setSubmitError('Live checkout service is unavailable. Showing a local demo quote instead.');
+      } else {
+        setSubmitError(err instanceof Error ? err.message : 'Checkout failed');
+      }
     } finally {
       setSubmitting(false);
     }
@@ -173,6 +189,14 @@ export function CheckoutPage() {
     <PageLayout>
       <PageHeader title="Checkout" />
 
+      <TrustNotice
+        state={trust.state}
+        loading={trust.loading}
+        error={trust.error}
+        reason={trust.reason}
+        actionLabel="Resolve trust in AadhaarChain"
+      />
+
       {submitError && (
         <div style={ERROR_ALERT_STYLE}>
           {submitError}
@@ -205,15 +229,35 @@ export function CheckoutPage() {
 
             <button
               type="submit"
-              disabled={submitting || !session?.buyer?.name || !session?.buyer?.contact?.email}
-              style={submitting ? BUTTON_DISABLED_STYLE : BUTTON_PRIMARY_STYLE}
+              disabled={
+                submitting ||
+                trustBlocksCheckout ||
+                !session?.buyer?.name ||
+                !session?.buyer?.contact?.email
+              }
+              style={
+                submitting ||
+                trustBlocksCheckout ||
+                !session?.buyer?.name ||
+                !session?.buyer?.contact?.email
+                  ? BUTTON_DISABLED_STYLE
+                  : BUTTON_PRIMARY_STYLE
+              }
             >
-              {submitting ? 'Processing...' : quote ? 'Place Order' : 'Get Quote'}
+              {trustBlocksCheckout
+                ? 'Trust verification required'
+                : submitting
+                  ? 'Processing...'
+                  : quote
+                    ? 'Place Order'
+                    : 'Get Quote'}
             </button>
 
-            {(!session?.buyer?.name || !session?.buyer?.contact?.email) && (
+            {(trustBlocksCheckout || !session?.buyer?.name || !session?.buyer?.contact?.email) && (
               <p style={VALIDATION_MESSAGE_STYLE}>
-                Please complete billing information to continue
+                {trustBlocksCheckout
+                  ? trust.reason || 'Complete AadhaarChain verification to continue.'
+                  : 'Please complete billing information to continue'}
               </p>
             )}
           </div>

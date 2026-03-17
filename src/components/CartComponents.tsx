@@ -1,4 +1,4 @@
-import { SPACING, TYPOGRAPHY, BUTTON, CARD, DRAMS, PILL_BUTTON } from '@drams-design/components';
+import { SPACING, TYPOGRAPHY, BUTTON, CARD, DRAMS } from '@drams-design/components';
 
 export interface CartItemProps {
   item: {
