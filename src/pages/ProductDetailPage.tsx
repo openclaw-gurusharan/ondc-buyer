@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useApi, useCart } from '../hooks';
 import { RatingStars } from '../components';
-import { PageLayout, DRAMS, SPACING, TYPOGRAPHY, BUTTON, CARD, COLORS, GRID, DramsFlipCard, FlipCardFront, FlipCardBack, DramsAddButton } from '@drams-design/components';
+import { PageLayout, DRAMS, SPACING, TYPOGRAPHY, BUTTON, CARD, COLORS, GRID, DramsFlipCard, FlipCardFront, FlipCardBack, DramsAddButton } from '@portfolio-ui';
 import type { UCPItem } from '../types';
 
 const BACK_BUTTON_STYLE = {

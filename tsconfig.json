@@ -15,7 +15,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@drams-design/components": ["../../Research/drams-design/src/index.ts"]
+      "@portfolio-ui": ["../shared/portfolio-ui/src/index.tsx"],
+      "react": ["./node_modules/@types/react/index.d.ts"],
+      "react-dom": ["./node_modules/@types/react-dom/index.d.ts"],
+      "react/jsx-runtime": ["./node_modules/@types/react/jsx-runtime.d.ts"]
     }
   },
   "include": ["src"]

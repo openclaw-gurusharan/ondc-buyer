@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { UCPOrder, UCPOrderStatus, UCPFulfillmentStatus } from '../types';
-import { PageLayout, DRAMS, COLORS, SPACING, TYPOGRAPHY, BUTTON, CARD, BADGE } from '@drams-design/components';
+import { PageLayout, DRAMS, COLORS, SPACING, TYPOGRAPHY, BUTTON, CARD, BADGE } from '@portfolio-ui';
 
 // Mock order fetch - to be replaced with API call
 const fetchOrder = async (): Promise<UCPOrder | null> => {
