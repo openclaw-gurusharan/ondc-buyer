@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { UCPOrder, UCPOrderStatus } from '../types';
-import { PageLayout, PageHeader, DRAMS, SPACING, TYPOGRAPHY, CARD, PILL_BUTTON, RADIUS, TRANSITIONS, BADGE, GRID, DramsTabGroup, DramsEmptyState, type DramsTabOption } from '@drams-design/components';
+import { PageLayout, DRAMS, SPACING, TYPOGRAPHY, CARD, BADGE, GRID, DramsTabGroup, DramsEmptyState, type DramsTabOption } from '@portfolio-ui';
 
 type StatusFilter = 'all' | 'pending' | 'active' | 'complete';
 
@@ -97,7 +97,7 @@ export function OrdersPage() {
       <DramsTabGroup
         options={tabOptions}
         value={filter}
-        onChange={(value) => setFilter(value as StatusFilter)}
+        onChange={(value: string) => setFilter(value as StatusFilter)}
         style={{ marginBottom: SPACING['2xl'] }}
       />
 

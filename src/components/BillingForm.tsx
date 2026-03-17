@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { COLORS, SPACING, TYPOGRAPHY, BUTTON, CARD, BADGE, DRAMS, DramsInput } from '@drams-design/components';
+import { COLORS, SPACING, TYPOGRAPHY, BUTTON, CARD, BADGE, DRAMS, DramsInput } from '@portfolio-ui';
+import { updateLocalBuyer } from '../lib/localCart';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 const STORAGE_KEY = 'ondc-session-id';
@@ -91,9 +92,9 @@ export function BillingForm({ session, onSave }: BillingFormProps): React.ReactE
 
     setSaving(true);
     setSaved(false);
+    const sessionId = localStorage.getItem(STORAGE_KEY);
 
     try {
-      const sessionId = localStorage.getItem(STORAGE_KEY);
       if (!sessionId) {
         throw new Error('No session found');
       }
@@ -114,12 +115,17 @@ export function BillingForm({ session, onSave }: BillingFormProps): React.ReactE
 
       // Notify parent component to refresh session
       await onSave?.();
-    } catch (err) {
-      console.error('Failed to save buyer info:', err);
+    } catch {
+      if (sessionId) {
+        updateLocalBuyer(sessionId, { name, email, phone, taxId });
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3000);
+        await onSave?.();
+      }
     } finally {
       setSaving(false);
     }
-  }, [name, email, phone, taxId]);
+  }, [name, email, phone, taxId, onSave]);
 
   const isDirty = useMemo(
     () =>

@@ -1,5 +1,11 @@
 import { useState, useCallback, useEffect } from 'react';
 import type { UCPSession, UCPSessionItem, BecknItem } from '../types';
+import {
+  addLocalItem,
+  getLocalSession,
+  removeLocalItem,
+  updateLocalQuantity,
+} from '../lib/localCart';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 const STORAGE_KEY = 'ondc-session-id';
@@ -64,7 +70,9 @@ export function useCart(): UseCartResult {
       const data = await cartRequest(`${API_BASE}/api/cart?sessionId=${sessionId}`);
       setSession(data.session);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load cart');
+      console.error('Failed to refresh cart, falling back to local session:', err);
+      setSession(getLocalSession(sessionId));
+      setError(null);
     } finally {
       setLoading(false);
     }
@@ -86,8 +94,9 @@ export function useCart(): UseCartResult {
       });
       setSession(data.session);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to add item to cart');
-      throw err;
+      console.error('Failed to add item to cart, falling back to local update:', err);
+      setSession(addLocalItem(sessionId, item, quantity));
+      setError(null);
     } finally {
       setLoading(false);
     }
@@ -104,8 +113,9 @@ export function useCart(): UseCartResult {
       );
       setSession(data.session);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to remove item from cart');
-      throw err;
+      console.error('Failed to remove item from cart, falling back to local update:', err);
+      setSession(removeLocalItem(sessionId, itemId));
+      setError(null);
     } finally {
       setLoading(false);
     }
@@ -123,8 +133,9 @@ export function useCart(): UseCartResult {
       });
       setSession(data.session);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update quantity');
-      throw err;
+      console.error('Failed to update cart quantity, falling back to local update:', err);
+      setSession(updateLocalQuantity(sessionId, itemId, quantity));
+      setError(null);
     } finally {
       setLoading(false);
     }
