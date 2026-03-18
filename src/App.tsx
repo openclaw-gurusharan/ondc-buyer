@@ -1,9 +1,8 @@
 import { Fragment } from 'react';
 import { Routes, Route, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AppShell, Badge, RollingSearch, type NavItem } from '@portfolio-ui';
-import { useAgentRuntime, useTrustState } from './hooks';
+import { useAgentRuntime, useSubject, useTrustState } from './hooks';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { SearchPage } from './pages/SearchPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
@@ -12,7 +11,6 @@ import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { OrdersPage } from './pages/OrdersPage';
 import { OrderDetailPage } from './pages/OrderDetailPage';
-import { useAuthContext } from '@/contexts/AuthContext';
 import { TrustStatusChip } from './components/TrustStatus';
 
 const NAV_ITEMS: NavItem[] = [
@@ -56,10 +54,7 @@ function getActivePath(pathname: string): string {
 export function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { publicKey } = useWallet();
-  const { user } = useAuthContext();
-  const walletAddress = publicKey?.toBase58() ?? null;
-  const subjectId = user?.wallet_address ?? walletAddress;
+  const { walletAddress, subjectId } = useSubject();
   const trust = useTrustState(walletAddress);
   const runtime = useAgentRuntime(subjectId, walletAddress);
 
