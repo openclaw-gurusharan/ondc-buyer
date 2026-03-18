@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Routes, Route, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AppShell, RollingSearch, type NavItem } from '@portfolio-ui';
-import { useTrustState } from './hooks';
+import { useAgentEntitlement, useTrustState } from './hooks';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { SearchPage } from './pages/SearchPage';
@@ -12,7 +12,9 @@ import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { OrdersPage } from './pages/OrdersPage';
 import { OrderDetailPage } from './pages/OrderDetailPage';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { TrustStatusChip } from './components/TrustStatus';
+import { SubscriptionStatusChip } from './components/SubscriptionStatusChip';
 
 const NAV_ITEMS: NavItem[] = [
   { href: '/search', label: 'Search' },
@@ -56,8 +58,11 @@ export function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const { publicKey } = useWallet();
+  const { user } = useAuthContext();
   const walletAddress = publicKey?.toBase58() ?? null;
+  const subjectId = user?.wallet_address ?? walletAddress;
   const trust = useTrustState(walletAddress);
+  const entitlement = useAgentEntitlement(subjectId, walletAddress);
 
   const handleSearch = (query: string) => {
     navigate(`/results?category=grocery&q=${encodeURIComponent(query)}`);
@@ -86,6 +91,9 @@ export function App() {
       headerSearch={<RollingSearch onSearch={handleSearch} />}
       actions={
         <Fragment>
+          {subjectId ? (
+            <SubscriptionStatusChip status={entitlement.subscription_status} loading={entitlement.loading} />
+          ) : null}
           {walletAddress ? (
             <TrustStatusChip state={trust.state} loading={trust.loading} />
           ) : null}
