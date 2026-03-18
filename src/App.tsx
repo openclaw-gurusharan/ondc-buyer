@@ -1,9 +1,8 @@
 import { Fragment } from 'react';
 import { Routes, Route, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
-import { AppShell, RollingSearch, type NavItem } from '@portfolio-ui';
-import { useTrustState } from './hooks';
+import { AppShell, Badge, RollingSearch, type NavItem } from '@portfolio-ui';
+import { useAgentRuntime, useSubject, useTrustState } from './hooks';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { SearchPage } from './pages/SearchPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
@@ -55,9 +54,9 @@ function getActivePath(pathname: string): string {
 export function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { publicKey } = useWallet();
-  const walletAddress = publicKey?.toBase58() ?? null;
+  const { walletAddress, subjectId } = useSubject();
   const trust = useTrustState(walletAddress);
+  const runtime = useAgentRuntime(subjectId, walletAddress);
 
   const handleSearch = (query: string) => {
     navigate(`/results?category=grocery&q=${encodeURIComponent(query)}`);
@@ -86,6 +85,11 @@ export function App() {
       headerSearch={<RollingSearch onSearch={handleSearch} />}
       actions={
         <Fragment>
+          {subjectId ? (
+            <Badge tone={runtime.runtime_available ? 'success' : 'warning'}>
+              {runtime.loading ? 'Runtime loading' : `Runtime ${runtime.auth_mode}`}
+            </Badge>
+          ) : null}
           {walletAddress ? (
             <TrustStatusChip state={trust.state} loading={trust.loading} />
           ) : null}
