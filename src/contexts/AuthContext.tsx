@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import type { SSOUser } from '@/lib/api';
+import { normalizeLoopbackUrl } from '@/lib/loopback';
 
-const IDENTITY_URL = import.meta.env.VITE_IDENTITY_URL || 'https://aadharcha.in';
-const IDENTITY_WEB_URL = import.meta.env.VITE_IDENTITY_WEB_URL || IDENTITY_URL;
+const IDENTITY_URL = normalizeLoopbackUrl(import.meta.env.VITE_IDENTITY_URL || 'http://127.0.0.1:43101');
+const IDENTITY_WEB_URL = normalizeLoopbackUrl(import.meta.env.VITE_IDENTITY_WEB_URL || 'http://127.0.0.1:43100');
 
 export type { SSOUser };
 
